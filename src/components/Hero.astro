@@ -1,0 +1,49 @@
+---
+import profile from '@/data/profile.json';
+---
+
+<section id="top" class="section pt-32 sm:pt-40 relative">
+  <div class="container-x">
+    <p class="accent text-sm mb-4 reveal">안녕하세요, 저는</p>
+
+    <h1 class="reveal text-5xl sm:text-7xl font-extrabold tracking-tight">
+      {profile.name}
+      <span class="text-slate-500 dark:text-slate-400 font-medium text-3xl sm:text-5xl ml-2 align-baseline">
+        ({profile.nameEn})
+      </span>
+    </h1>
+
+    <h2 class="reveal text-3xl sm:text-5xl font-bold text-slate-500 dark:text-slate-400 mt-2">
+      <span class="text-gradient">{profile.role}</span>
+    </h2>
+
+    <p class="reveal mt-6 text-base sm:text-lg text-muted-light dark:text-muted-dark max-w-2xl leading-relaxed">
+      <span class="accent">$</span> {profile.tagline}
+    </p>
+
+    <p class="reveal mt-3 text-sm sm:text-base text-muted-light dark:text-muted-dark max-w-2xl">
+      {profile.headline}
+    </p>
+
+    <div class="reveal mt-10 flex flex-wrap gap-3">
+      <a
+        href="#projects"
+        class="inline-flex items-center gap-2 px-5 py-3 rounded-lg border border-accent-light dark:border-accent-dark text-accent-light dark:text-accent-dark hover:bg-accent-light/5 dark:hover:bg-accent-dark/5 transition-colors font-mono text-sm"
+      >
+        <span>프로젝트 보기</span>
+        <span aria-hidden>→</span>
+      </a>
+      <a
+        href={`mailto:${profile.email}`}
+        class="inline-flex items-center gap-2 px-5 py-3 rounded-lg bg-slate-900 text-white dark:bg-white dark:text-slate-900 hover:opacity-90 transition-opacity font-mono text-sm"
+      >
+        <span>이메일 보내기</span>
+      </a>
+    </div>
+
+    <div class="reveal mt-16 flex flex-wrap gap-x-8 gap-y-3 text-sm text-muted-light dark:text-muted-dark font-mono">
+      <span class="flex items-center gap-2"><span class="accent">@</span>{profile.location}</span>
+      <span class="flex items-center gap-2"><span class="accent">@</span>{profile.currentCompany}</span>
+    </div>
+  </div>
+</section>

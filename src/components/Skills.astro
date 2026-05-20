@@ -1,0 +1,30 @@
+---
+import skills from '@/data/skills.json';
+---
+
+<section id="skills" class="section relative">
+  <div class="container-x">
+    <h2 class="section-title reveal">
+      <span class="accent text-base font-mono">02.</span>
+      Skills
+    </h2>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 mt-10">
+      {
+        skills.groups.map((g) => (
+          <div class="card card-hover p-6 reveal">
+            <h3 class="font-bold mb-4 flex items-center gap-2">
+              <span class="accent font-mono text-xs">▸</span>
+              {g.title}
+            </h3>
+            <ul class="flex flex-wrap gap-2">
+              {g.items.map((item) => (
+                <li class="badge">{item}</li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

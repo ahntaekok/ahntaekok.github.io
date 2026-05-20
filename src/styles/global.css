@@ -1,0 +1,109 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: light dark;
+  }
+  html {
+    scroll-behavior: smooth;
+    @apply font-sans antialiased;
+  }
+  body {
+    @apply bg-bg-light text-slate-900 dark:bg-bg-dark dark:text-slate-100 transition-colors duration-300;
+    background-image:
+      radial-gradient(circle at 20% 10%, rgba(100, 255, 218, 0.06), transparent 40%),
+      radial-gradient(circle at 80% 80%, rgba(14, 165, 233, 0.06), transparent 40%);
+    background-attachment: fixed;
+  }
+  ::selection {
+    @apply bg-accent-light/30 dark:bg-accent-dark/30;
+  }
+}
+
+@layer components {
+  .container-x {
+    @apply max-w-5xl mx-auto px-6 sm:px-8 lg:px-10;
+  }
+  .section {
+    @apply py-20 sm:py-28 scroll-mt-24;
+  }
+  .section-title {
+    @apply text-2xl sm:text-3xl font-bold mb-3 inline-flex items-center gap-3;
+  }
+  .section-title::before {
+    content: '';
+    @apply h-px w-8 bg-accent-light dark:bg-accent-dark inline-block;
+  }
+  .badge {
+    @apply inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium font-mono
+           bg-slate-100 text-slate-700 border border-slate-200
+           dark:bg-slate-800/60 dark:text-slate-300 dark:border-slate-700;
+  }
+  .card {
+    @apply rounded-2xl border border-slate-200 bg-white/60 backdrop-blur
+           dark:border-slate-800 dark:bg-slate-900/40
+           transition-all duration-300;
+  }
+  .card-hover {
+    @apply hover:border-accent-light/50 dark:hover:border-accent-dark/50
+           hover:shadow-lg hover:shadow-accent-light/5 dark:hover:shadow-accent-dark/5
+           hover:-translate-y-1;
+  }
+  .accent {
+    @apply text-accent-light dark:text-accent-dark font-mono;
+  }
+  .link-underline {
+    @apply relative inline-block;
+  }
+  .link-underline::after {
+    content: '';
+    @apply absolute left-0 -bottom-0.5 h-px w-0 bg-current transition-all duration-300;
+  }
+  .link-underline:hover::after {
+    @apply w-full;
+  }
+}
+
+@layer utilities {
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+  }
+  .reveal.in-view {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .text-gradient {
+    @apply bg-gradient-to-r from-sky-500 via-cyan-400 to-emerald-400
+           dark:from-cyan-300 dark:via-teal-300 dark:to-emerald-300
+           bg-clip-text text-transparent;
+  }
+  .grid-pattern {
+    background-image:
+      linear-gradient(to right, rgba(148, 163, 184, 0.08) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(148, 163, 184, 0.08) 1px, transparent 1px);
+    background-size: 32px 32px;
+  }
+}
+
+#spotlight {
+  position: fixed;
+  pointer-events: none;
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(100, 255, 218, 0.10), transparent 60%);
+  transform: translate(-50%, -50%);
+  z-index: 0;
+  transition: opacity 0.3s ease;
+  opacity: 0;
+}
+:root.dark #spotlight {
+  opacity: 1;
+}
+@media (max-width: 768px) {
+  #spotlight { display: none; }
+}

@@ -1,0 +1,69 @@
+{
+  "name": "안태국",
+  "nameEn": "Taeguk Ahn",
+  "role": "Backend Developer",
+  "tagline": "AI 자동화 · 데이터 파이프라인 · IoT 산업용 시스템",
+  "headline": "기획 단계의 프롬프트 한 줄부터, 운영 중인 서버의 DDoS 차단 한 줄까지 — 자동화의 End-to-End를 책임지는 개발자.",
+  "location": "경남 김해시",
+  "email": "atk0349@naver.com",
+  "phone": "010-3774-7073",
+  "birth": "1993.01.27",
+  "github": "ahntaekok",
+  "githubUrl": "https://github.com/ahntaekok",
+  "avatarEmoji": "🦊",
+  "currentCompany": "(주)에이치엘스토리 · 개발팀",
+  "education": [
+    {
+      "school": "학점은행제 컴퓨터공학",
+      "period": "2022 ~ 현재",
+      "status": "졸업예정"
+    },
+    {
+      "school": "김해생명과학고등학교",
+      "period": "~ 2011",
+      "status": "졸업"
+    }
+  ],
+  "experience": [
+    {
+      "company": "(주)에이치엘스토리",
+      "role": "개발팀",
+      "period": "2024.11 ~ 현재"
+    },
+    {
+      "company": "(주)이지테이크",
+      "role": "개발팀 대리",
+      "period": "2023.09 ~ 2024.10"
+    },
+    {
+      "company": "JAVA & Spring 개발자 양성과정",
+      "role": "수료",
+      "period": "2023.02 ~ 2023.08"
+    }
+  ],
+  "certifications": [
+    { "name": "SQL 개발자 (SQLD)", "date": "2024.09" },
+    { "name": "정보처리기사 필기", "date": "2024.03" },
+    { "name": "네트워크관리사 2급", "date": "2022.12" },
+    { "name": "컴퓨터활용능력 1급", "date": "2022.10" },
+    { "name": "ITQ OA Master", "date": "2015.03" }
+  ],
+  "summary": [
+    {
+      "title": "데이터 파이프라인 & AI 자동화",
+      "body": "Python 크롤링 엔진(Selenium · CDP · Playwright)과 LLM API를 결합한 자동화 파이프라인을 구축했습니다. .exe 패키징 + 자체 라이선스 시스템 연동으로, 원고 작성 시간을 1시간 → 3분 (≈ 95% 단축)으로 줄이고 유료 고객 관리 자동화를 동시에 달성했습니다."
+    },
+    {
+      "title": "IoT 및 산업용 실시간 데이터 처리",
+      "body": "스마트 팩토리(MES · HACCP) 프로젝트를 리딩하며 PLC·센서 데이터를 실시간 수집하는 백엔드를 설계, 통신 단절 예외 처리·에러 로깅을 통해 데이터 무결성을 보장하고 공식 인증(스마트 HACCP · 스마트 팩토리)을 통과시켰습니다."
+    },
+    {
+      "title": "서버 보안 & 인프라 최적화",
+      "body": "실시간 트래픽 패턴 분석을 통한 비정상 트래픽(DDoS·악성 봇) 자동 차단 알고리즘 자체 구현, 주요 취약점(Log4j · SQL Injection) 선제 방어. Cloudflare · DNS · 무중단 마이그레이션 등 실무 인프라 운영 역량을 갖추고 있습니다."
+    },
+    {
+      "title": "풀스택 & 크로스플랫폼 아키텍처",
+      "body": "PHP(그누보드) · Node.js 기반 20여 개 맞춤형 기업 서비스 고도화, React Native(Expo) 기반 웹↔앱 크로스플랫폼 전환·스토어 배포까지 End-to-End 개발 사이클을 완수했습니다."
+    }
+  ]
+}

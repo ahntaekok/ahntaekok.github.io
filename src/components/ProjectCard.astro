@@ -1,0 +1,167 @@
+---
+interface ImageT {
+  src: string;
+  caption?: string;
+}
+interface SectionT {
+  title: string;
+  items: string[];
+}
+interface ProjectT {
+  id: string;
+  title: string;
+  subtitle: string;
+  company: string;
+  period: string;
+  duration?: string;
+  team: string;
+  role: string;
+  stack: string[];
+  tags?: string[];
+  highlight?: boolean;
+  summary: string;
+  details?: string[];
+  sections?: SectionT[];
+  results?: string[];
+  images?: ImageT[];
+}
+
+interface Props {
+  project: ProjectT;
+  index: number;
+}
+
+const { project, index } = Astro.props;
+const num = String(index + 1).padStart(2, '0');
+---
+
+<article
+  id={`project-${project.id}`}
+  class="card card-hover p-6 sm:p-8 reveal"
+  data-highlight={project.highlight ? 'true' : 'false'}
+>
+  <div class="flex items-start justify-between gap-4 flex-wrap">
+    <div class="min-w-0 flex-1">
+      <div class="flex items-center gap-2 mb-2">
+        <span class="accent font-mono text-xs">PROJECT {num}</span>
+        {
+          project.highlight && (
+            <span class="text-[10px] px-2 py-0.5 rounded-full bg-amber-100 text-amber-700 dark:bg-amber-500/10 dark:text-amber-300 font-mono">
+              FEATURED
+            </span>
+          )
+        }
+      </div>
+      <h3 class="text-xl sm:text-2xl font-bold leading-snug">{project.title}</h3>
+      <p class="text-sm text-muted-light dark:text-muted-dark mt-1 font-mono">{project.subtitle}</p>
+    </div>
+  </div>
+
+  <p class="mt-5 text-sm sm:text-base leading-relaxed">{project.summary}</p>
+
+  <dl class="mt-5 grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
+    <div>
+      <dt class="text-muted-light dark:text-muted-dark font-mono">소속</dt>
+      <dd class="mt-1 font-medium">{project.company}</dd>
+    </div>
+    <div>
+      <dt class="text-muted-light dark:text-muted-dark font-mono">기간</dt>
+      <dd class="mt-1 font-medium">{project.period}</dd>
+    </div>
+    <div>
+      <dt class="text-muted-light dark:text-muted-dark font-mono">역할</dt>
+      <dd class="mt-1 font-medium">{project.role}</dd>
+    </div>
+    <div>
+      <dt class="text-muted-light dark:text-muted-dark font-mono">인원</dt>
+      <dd class="mt-1 font-medium">{project.team}</dd>
+    </div>
+  </dl>
+
+  {
+    project.images && project.images.length > 0 && (
+      <div class="mt-6 grid sm:grid-cols-2 gap-3">
+        {project.images.map((img) => (
+          <figure class="rounded-lg overflow-hidden border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/50">
+            <div class="aspect-video flex items-center justify-center bg-gradient-to-br from-slate-100 to-slate-200 dark:from-slate-800 dark:to-slate-900">
+              <img
+                src={img.src}
+                alt={img.caption ?? project.title}
+                class="object-cover w-full h-full"
+                loading="lazy"
+                onerror="this.style.display='none'; this.parentElement.innerHTML += '<div class=\'text-center p-4\'><div class=\'text-4xl mb-2 opacity-40\'>🖼️</div><div class=\'text-xs text-slate-500 font-mono\'>'+this.alt+'</div></div>';"
+              />
+            </div>
+            {img.caption && (
+              <figcaption class="text-[11px] text-muted-light dark:text-muted-dark px-3 py-2 font-mono">
+                {img.caption}
+              </figcaption>
+            )}
+          </figure>
+        ))}
+      </div>
+    )
+  }
+
+  {
+    project.details && project.details.length > 0 && (
+      <div class="mt-6">
+        <h4 class="font-bold text-sm mb-3 flex items-center gap-2">
+          <span class="accent font-mono">▸</span>
+          상세 내용
+        </h4>
+        <ul class="space-y-2">
+          {project.details.map((d) => (
+            <li class="text-sm leading-relaxed pl-4 relative">
+              <span class="absolute left-0 top-2 w-1 h-1 rounded-full bg-accent-light dark:bg-accent-dark" />
+              {d}
+            </li>
+          ))}
+        </ul>
+      </div>
+    )
+  }
+
+  {
+    project.sections && project.sections.length > 0 && (
+      <div class="mt-6 space-y-5">
+        {project.sections.map((s) => (
+          <div>
+            <h4 class="font-bold text-sm mb-3 text-gradient inline-block">{s.title}</h4>
+            <ul class="space-y-2">
+              {s.items.map((it) => (
+                <li class="text-sm leading-relaxed pl-4 relative">
+                  <span class="absolute left-0 top-2 w-1 h-1 rounded-full bg-accent-light dark:bg-accent-dark" />
+                  {it}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    )
+  }
+
+  {
+    project.results && project.results.length > 0 && (
+      <div class="mt-6 p-4 rounded-lg border border-emerald-200/60 bg-emerald-50/50 dark:border-emerald-500/20 dark:bg-emerald-500/5">
+        <h4 class="font-bold text-sm mb-2 text-emerald-700 dark:text-emerald-300 flex items-center gap-2">
+          <span aria-hidden>💡</span>
+          성과
+        </h4>
+        <ul class="space-y-1.5">
+          {project.results.map((r) => (
+            <li class="text-sm leading-relaxed pl-4 relative">
+              <span class="absolute left-0 top-2 w-1 h-1 rounded-full bg-emerald-500" />
+              {r}
+            </li>
+          ))}
+        </ul>
+      </div>
+    )
+  }
+
+  <div class="mt-6 flex flex-wrap gap-2">
+    {project.stack.map((s) => <span class="badge">{s}</span>)}
+  </div>
+</article>

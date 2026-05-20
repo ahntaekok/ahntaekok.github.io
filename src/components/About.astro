@@ -1,0 +1,79 @@
+---
+import profile from '@/data/profile.json';
+---
+
+<section id="about" class="section relative">
+  <div class="container-x">
+    <h2 class="section-title reveal">
+      <span class="accent text-base font-mono">01.</span>
+      About Me
+    </h2>
+
+    <div class="grid md:grid-cols-5 gap-10 mt-10">
+      <div class="md:col-span-3 space-y-6 reveal">
+        {
+          profile.summary.map((s) => (
+            <div class="card card-hover p-6">
+              <h3 class="font-bold text-lg mb-2 text-gradient inline-block">{s.title}</h3>
+              <p class="text-sm leading-relaxed text-muted-light dark:text-muted-dark">{s.body}</p>
+            </div>
+          ))
+        }
+      </div>
+
+      <aside class="md:col-span-2 space-y-6 reveal">
+        <div class="card p-6">
+          <h3 class="font-bold mb-4 flex items-center gap-2">
+            <span class="accent text-xs font-mono">[Experience]</span>
+          </h3>
+          <ul class="space-y-3 text-sm">
+            {
+              profile.experience.map((e) => (
+                <li>
+                  <div class="font-medium">{e.company}</div>
+                  <div class="text-xs text-muted-light dark:text-muted-dark font-mono">
+                    {e.role} · {e.period}
+                  </div>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+
+        <div class="card p-6">
+          <h3 class="font-bold mb-4 flex items-center gap-2">
+            <span class="accent text-xs font-mono">[Education]</span>
+          </h3>
+          <ul class="space-y-3 text-sm">
+            {
+              profile.education.map((e) => (
+                <li>
+                  <div class="font-medium">{e.school}</div>
+                  <div class="text-xs text-muted-light dark:text-muted-dark font-mono">
+                    {e.period} · {e.status}
+                  </div>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+
+        <div class="card p-6">
+          <h3 class="font-bold mb-4 flex items-center gap-2">
+            <span class="accent text-xs font-mono">[Certifications]</span>
+          </h3>
+          <ul class="space-y-2 text-sm">
+            {
+              profile.certifications.map((c) => (
+                <li class="flex justify-between gap-3">
+                  <span>{c.name}</span>
+                  <span class="text-xs text-muted-light dark:text-muted-dark font-mono shrink-0">{c.date}</span>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>

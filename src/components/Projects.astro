@@ -1,0 +1,74 @@
+---
+import projectData from '@/data/projects.json';
+import ProjectCard from './ProjectCard.astro';
+
+const allTags = Array.from(new Set(projectData.projects.flatMap((p) => p.tags ?? [])));
+---
+
+<section id="projects" class="section relative">
+  <div class="container-x">
+    <h2 class="section-title reveal">
+      <span class="accent text-base font-mono">03.</span>
+      Projects
+    </h2>
+    <p class="reveal mt-2 text-muted-light dark:text-muted-dark text-sm">
+      <span class="accent font-mono">$</span> 전체 {projectData.projects.length}개 · 클릭하면 카드가 펼쳐집니다.
+    </p>
+
+    {
+      allTags.length > 0 && (
+        <div class="reveal mt-6 flex flex-wrap gap-2" id="tag-filter">
+          <button class="badge cursor-pointer hover:bg-accent-light/20 dark:hover:bg-accent-dark/20 transition-colors" data-tag="ALL" data-active="true">
+            ALL
+          </button>
+          {allTags.map((t) => (
+            <button class="badge cursor-pointer hover:bg-accent-light/20 dark:hover:bg-accent-dark/20 transition-colors" data-tag={t}>
+              {t}
+            </button>
+          ))}
+        </div>
+      )
+    }
+
+    <div class="grid lg:grid-cols-2 gap-6 mt-10" id="project-grid">
+      {projectData.projects.map((p, i) => <ProjectCard project={p} index={i} />)}
+    </div>
+  </div>
+</section>
+
+<script is:inline>
+  (function () {
+    const buttons = document.querySelectorAll('#tag-filter [data-tag]');
+    const cards = document.querySelectorAll('#project-grid > article');
+    if (!buttons.length) return;
+    buttons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const tag = btn.getAttribute('data-tag');
+        buttons.forEach((b) => b.removeAttribute('data-active'));
+        btn.setAttribute('data-active', 'true');
+        cards.forEach((card) => {
+          if (tag === 'ALL') {
+            card.style.display = '';
+            return;
+          }
+          const id = card.id.replace('project-', '');
+          const proj = window.__PROJECTS_TAGS && window.__PROJECTS_TAGS[id];
+          card.style.display = proj && proj.includes(tag) ? '' : 'none';
+        });
+      });
+    });
+    document.querySelectorAll('#tag-filter [data-tag]').forEach((b) => {
+      if (b.hasAttribute('data-active')) {
+        b.style.background = 'rgba(100,255,218,0.15)';
+      }
+    });
+  })();
+</script>
+
+<script is:inline define:vars={{ projectsData: projectData.projects }}>
+  // 태그 필터를 위해 프로젝트별 태그 맵을 window에 노출
+  window.__PROJECTS_TAGS = projectsData.reduce((acc, p) => {
+    acc[p.id] = p.tags || [];
+    return acc;
+  }, {});
+</script>

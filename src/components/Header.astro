@@ -1,0 +1,52 @@
+---
+import profile from '@/data/profile.json';
+const nav = [
+  { label: 'About', href: '#about' },
+  { label: 'Skills', href: '#skills' },
+  { label: 'Projects', href: '#projects' },
+  { label: 'Contact', href: '#contact' },
+];
+---
+
+<header
+  class="sticky top-0 z-40 backdrop-blur-lg bg-bg-light/70 dark:bg-bg-dark/60 border-b border-slate-200/60 dark:border-slate-800/60"
+>
+  <nav class="container-x flex items-center justify-between h-16">
+    <a href="#top" class="flex items-center gap-2 group">
+      <span class="text-xl">{profile.avatarEmoji}</span>
+      <span class="font-mono text-sm tracking-tight">
+        <span class="accent">~/</span>{profile.nameEn.toLowerCase().replace(' ', '-')}
+      </span>
+    </a>
+
+    <ul class="hidden md:flex items-center gap-1">
+      {
+        nav.map((item, i) => (
+          <li>
+            <a
+              href={item.href}
+              class="link-underline px-3 py-2 text-sm text-muted-light dark:text-muted-dark hover:text-slate-900 dark:hover:text-slate-100 transition-colors"
+            >
+              <span class="accent text-xs mr-1">0{i + 1}.</span>
+              {item.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+
+    <button
+      data-theme-toggle
+      aria-label="Toggle theme"
+      class="p-2 rounded-lg border border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+    >
+      <svg class="w-4 h-4 hidden dark:block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="12" cy="12" r="5"></circle>
+        <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path>
+      </svg>
+      <svg class="w-4 h-4 dark:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+      </svg>
+    </button>
+  </nav>
+</header>
