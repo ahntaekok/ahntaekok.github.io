@@ -3,9 +3,14 @@ interface ImageT {
   src: string;
   caption?: string;
 }
+interface GroupT {
+  label: string;
+  items: string[];
+}
 interface SectionT {
   title: string;
-  items: string[];
+  items?: string[];
+  groups?: GroupT[];
 }
 interface ProjectT {
   id: string;
@@ -83,15 +88,25 @@ const num = String(index + 1).padStart(2, '0');
       <div class="mt-6 grid sm:grid-cols-2 gap-3">
         {project.images.map((img) => (
           <figure class="rounded-lg overflow-hidden border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/50">
-            <div class="aspect-video flex items-center justify-center bg-gradient-to-br from-slate-100 to-slate-200 dark:from-slate-800 dark:to-slate-900">
+            <button
+              type="button"
+              class="lightbox-trigger w-full aspect-video flex items-center justify-center bg-gradient-to-br from-slate-100 to-slate-200 dark:from-slate-800 dark:to-slate-900 relative group cursor-zoom-in"
+              data-src={img.src}
+              data-caption={img.caption ?? project.title}
+            >
               <img
                 src={img.src}
                 alt={img.caption ?? project.title}
-                class="object-cover w-full h-full"
+                class="object-cover w-full h-full transition-transform duration-300 group-hover:scale-105"
                 loading="lazy"
                 onerror="this.style.display='none'; this.parentElement.innerHTML += '<div class=\'text-center p-4\'><div class=\'text-4xl mb-2 opacity-40\'>🖼️</div><div class=\'text-xs text-slate-500 font-mono\'>'+this.alt+'</div></div>';"
               />
-            </div>
+              <div class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300 flex items-center justify-center">
+                <svg class="w-8 h-8 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 drop-shadow-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/>
+                </svg>
+              </div>
+            </button>
             {img.caption && (
               <figcaption class="text-[11px] text-muted-light dark:text-muted-dark px-3 py-2 font-mono">
                 {img.caption}
@@ -102,6 +117,7 @@ const num = String(index + 1).padStart(2, '0');
       </div>
     )
   }
+
 
   {
     project.details && project.details.length > 0 && (
@@ -128,14 +144,35 @@ const num = String(index + 1).padStart(2, '0');
         {project.sections.map((s) => (
           <div>
             <h4 class="font-bold text-sm mb-3 text-gradient inline-block">{s.title}</h4>
-            <ul class="space-y-2">
-              {s.items.map((it) => (
-                <li class="text-sm leading-relaxed pl-4 relative">
-                  <span class="absolute left-0 top-2 w-1 h-1 rounded-full bg-accent-light dark:bg-accent-dark" />
-                  {it}
-                </li>
-              ))}
-            </ul>
+            {s.items && s.items.length > 0 && (
+              <ul class="space-y-2">
+                {s.items.map((it) => (
+                  <li class="text-sm leading-relaxed pl-4 relative">
+                    <span class="absolute left-0 top-2 w-1 h-1 rounded-full bg-accent-light dark:bg-accent-dark" />
+                    {it}
+                  </li>
+                ))}
+              </ul>
+            )}
+            {s.groups && s.groups.length > 0 && (
+              <div class="space-y-4">
+                {s.groups.map((g) => (
+                  <div>
+                    <span class="inline-block text-[10px] font-mono font-semibold px-2 py-0.5 rounded-md bg-accent-light/10 dark:bg-accent-dark/10 text-accent-light dark:text-accent-dark border border-accent-light/30 dark:border-accent-dark/30 mb-2">
+                      {g.label}
+                    </span>
+                    <ul class="space-y-2">
+                      {g.items.map((it) => (
+                        <li class="text-sm leading-relaxed pl-4 relative">
+                          <span class="absolute left-0 top-2 w-1 h-1 rounded-full bg-accent-light dark:bg-accent-dark" />
+                          {it}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
         ))}
       </div>
@@ -165,3 +202,49 @@ const num = String(index + 1).padStart(2, '0');
     {project.stack.map((s) => <span class="badge">{s}</span>)}
   </div>
 </article>
+
+<script>
+  (function () {
+    // 전역 라이트박스가 이미 있으면 재생성 안 함
+    if (document.getElementById('global-lightbox')) return;
+
+    const lb = document.createElement('div');
+    lb.id = 'global-lightbox';
+    lb.style.cssText = 'display:none;position:fixed;inset:0;z-index:9999;align-items:center;justify-content:center;padding:1rem;';
+    lb.innerHTML = `
+      <div id="lb-backdrop" style="position:absolute;inset:0;background:rgba(0,0,0,0.88);backdrop-filter:blur(6px);"></div>
+      <div style="position:relative;z-index:10;max-width:90vw;width:100%;display:flex;flex-direction:column;align-items:center;gap:0.75rem;">
+        <button id="lb-close" aria-label="닫기" style="position:absolute;top:-2.5rem;right:0;color:rgba(255,255,255,0.7);background:none;border:none;cursor:pointer;line-height:0;">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        </button>
+        <img id="lb-img" src="" alt="" style="max-height:85vh;max-width:90vw;width:auto;border-radius:0.5rem;box-shadow:0 25px 60px rgba(0,0,0,0.6);object-fit:contain;" />
+        <p id="lb-caption" style="font-size:0.75rem;color:rgba(255,255,255,0.65);font-family:monospace;text-align:center;"></p>
+      </div>
+    `;
+    document.body.appendChild(lb);
+
+    const img = document.getElementById('lb-img') as HTMLImageElement;
+    const cap = document.getElementById('lb-caption') as HTMLElement;
+
+    function open(src: string, caption: string) {
+      img.src = src;
+      img.alt = caption;
+      cap.textContent = caption;
+      lb.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    }
+
+    function close() {
+      lb.style.display = 'none';
+      document.body.style.overflow = '';
+    }
+
+    document.getElementById('lb-close')!.addEventListener('click', close);
+    document.getElementById('lb-backdrop')!.addEventListener('click', close);
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') close(); });
+
+    document.querySelectorAll<HTMLButtonElement>('.lightbox-trigger').forEach((btn) => {
+      btn.addEventListener('click', () => open(btn.dataset.src ?? '', btn.dataset.caption ?? ''));
+    });
+  })();
+</script>

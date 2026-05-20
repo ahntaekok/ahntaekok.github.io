@@ -1,22 +1,23 @@
 {
   "name": "안태국",
-  "nameEn": "Taeguk Ahn",
+  "nameEn": "Taekuk Ahn",
   "role": "Backend Developer",
   "tagline": "AI 자동화 · 데이터 파이프라인 · IoT 산업용 시스템",
-  "headline": "기획 단계의 프롬프트 한 줄부터, 운영 중인 서버의 DDoS 차단 한 줄까지 — 자동화의 End-to-End를 책임지는 개발자.",
-  "location": "경남 김해시",
+  "headline": "Python 자동화부터 PHP 웹서비스까지, 필요한 걸 필요한 방식으로 만드는 개발자",
+  "location": "부산광역시 동래구",
   "email": "atk0349@naver.com",
   "phone": "010-3774-7073",
   "birth": "1993.01.27",
-  "github": "ahntaekok",
+  "github": "ahntaekuk",
   "githubUrl": "https://github.com/ahntaekok",
   "avatarEmoji": "🦊",
+  "avatar": "/images/avatar.png",
   "currentCompany": "(주)에이치엘스토리 · 개발팀",
   "education": [
     {
       "school": "학점은행제 컴퓨터공학",
-      "period": "2022 ~ 현재",
-      "status": "졸업예정"
+      "period": "2022.02 ~ 2025.08",
+      "status": "졸업"
     },
     {
       "school": "김해생명과학고등학교",
@@ -27,13 +28,13 @@
   "experience": [
     {
       "company": "(주)에이치엘스토리",
-      "role": "개발팀",
+      "role": "AI플랫폼개발팀",
       "period": "2024.11 ~ 현재"
     },
     {
       "company": "(주)이지테이크",
       "role": "개발팀 대리",
-      "period": "2023.09 ~ 2024.10"
+      "period": "2023.09 ~ 2024.11"
     },
     {
       "company": "JAVA & Spring 개발자 양성과정",
@@ -42,8 +43,8 @@
     }
   ],
   "certifications": [
+    { "name": "정보처리기사", "date": "2025.06" },
     { "name": "SQL 개발자 (SQLD)", "date": "2024.09" },
-    { "name": "정보처리기사 필기", "date": "2024.03" },
     { "name": "네트워크관리사 2급", "date": "2022.12" },
     { "name": "컴퓨터활용능력 1급", "date": "2022.10" },
     { "name": "ITQ OA Master", "date": "2015.03" }

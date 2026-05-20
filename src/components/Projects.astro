@@ -41,11 +41,23 @@ const allTags = Array.from(new Set(projectData.projects.flatMap((p) => p.tags ??
     const buttons = document.querySelectorAll('#tag-filter [data-tag]');
     const cards = document.querySelectorAll('#project-grid > article');
     if (!buttons.length) return;
+    const setActive = (activeBtn) => {
+      buttons.forEach((b) => {
+        b.removeAttribute('data-active');
+        b.style.background = '';
+      });
+      activeBtn.setAttribute('data-active', 'true');
+      activeBtn.style.background = 'rgba(100,255,218,0.15)';
+    };
+
+    // 초기 ALL 버튼 활성화
+    const allBtn = document.querySelector('#tag-filter [data-tag="ALL"]');
+    if (allBtn) setActive(allBtn);
+
     buttons.forEach((btn) => {
       btn.addEventListener('click', () => {
         const tag = btn.getAttribute('data-tag');
-        buttons.forEach((b) => b.removeAttribute('data-active'));
-        btn.setAttribute('data-active', 'true');
+        setActive(btn);
         cards.forEach((card) => {
           if (tag === 'ALL') {
             card.style.display = '';
@@ -56,11 +68,6 @@ const allTags = Array.from(new Set(projectData.projects.flatMap((p) => p.tags ??
           card.style.display = proj && proj.includes(tag) ? '' : 'none';
         });
       });
-    });
-    document.querySelectorAll('#tag-filter [data-tag]').forEach((b) => {
-      if (b.hasAttribute('data-active')) {
-        b.style.background = 'rgba(100,255,218,0.15)';
-      }
     });
   })();
 </script>
