@@ -18,11 +18,9 @@ interface ProjectT {
   subtitle: string;
   company: string;
   period: string;
-  duration?: string;
   team: string;
   role: string;
   stack: string[];
-  tags?: string[];
   highlight?: boolean;
   summary: string;
   details?: string[];
@@ -42,7 +40,7 @@ const num = String(index + 1).padStart(2, '0');
 
 <article
   id={`project-${project.id}`}
-  class="card card-hover p-6 sm:p-8 reveal"
+  class="card p-6 sm:p-8 reveal"
   data-highlight={project.highlight ? 'true' : 'false'}
 >
   <div class="flex items-start justify-between gap-4 flex-wrap">
@@ -85,7 +83,10 @@ const num = String(index + 1).padStart(2, '0');
 
   {
     project.images && project.images.length > 0 && (
-      <div class="mt-6 grid sm:grid-cols-2 gap-3">
+      <div class:list={[
+        'mt-6 grid gap-3',
+        project.images.length === 1 ? 'grid-cols-1' : 'sm:grid-cols-2'
+      ]}>
         {project.images.map((img) => (
           <figure class="rounded-lg overflow-hidden border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/50">
             <button

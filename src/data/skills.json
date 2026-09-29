@@ -1,28 +1,28 @@
 {
   "groups": [
     {
-      "title": "Languages",
-      "items": ["Python", "PHP", "Node.js", "Java", "TypeScript", "SQL"]
+      "title": "Backend",
+      "items": ["Python", "Node.js", "PHP", "FastAPI", "Express", "REST API"]
     },
     {
-      "title": "Frameworks",
-      "items": ["React", "React Native (Expo)", "Express", "FastAPI", "Spring", "전자정부프레임워크", "그누보드"]
+      "title": "AI / Data Pipeline",
+      "items": ["OpenAI API", "Gemini API", "Google Imagen4", "Playwright", "Selenium / CDP", "BeautifulSoup"]
     },
     {
-      "title": "Database",
-      "items": ["MariaDB / MySQL", "MongoDB", "Oracle"]
+      "title": "Data Storage",
+      "items": ["MySQL / MariaDB", "MongoDB", "SQL", "데이터 모델링"]
     },
     {
-      "title": "AI / Data",
-      "items": ["LLM API (GPT, Gemini)", "Google Imagen4", "Playwright", "Selenium / CDP", "BeautifulSoup"]
+      "title": "Reliability / Automation",
+      "items": ["Batch Processing", "Retry / Backoff", "In-memory Cache", "Job Queue", "JWT", "Rate Limit 대응"]
     },
     {
       "title": "Infra / Ops",
-      "items": ["Linux Server", "Cloudflare", "Crontab", "Windows Task Scheduler", "SMTP", "SSL / HTTPS"]
+      "items": ["Linux", "Nginx", "Cloudflare", "Crontab", "Windows Task Scheduler", "SSL / HTTPS"]
     },
     {
-      "title": "기타 경험",
-      "items": ["REST API 설계·구현", "실시간 데이터 처리", "PLC 통신 / IoT", "카카오 알림톡·SMS", "결제 연동", "시스템 통합·자동화"]
+      "title": "Additional Experience",
+      "items": ["Java / Spring", "React / TypeScript", "React Native / Expo", "PLC 통신 / IoT", "SMTP·알림톡·SMS", "결제 연동"]
     }
   ]
 }
