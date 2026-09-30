@@ -2,23 +2,23 @@
   "groups": [
     {
       "title": "Backend",
-      "items": ["Python", "Node.js", "PHP", "FastAPI", "Express", "REST API"]
+      "items": ["Python", "Node.js", "PHP", "FastAPI", "Express", "REST API 설계"]
     },
     {
       "title": "AI / Data Pipeline",
-      "items": ["OpenAI API", "Gemini API", "Google Imagen4", "Playwright", "Selenium / CDP", "BeautifulSoup"]
+      "items": ["OpenAI API", "Gemini API", "Google Imagen4", "Playwright", "Selenium / CDP", "BeautifulSoup", "KoNLPy"]
     },
     {
       "title": "Data Storage",
-      "items": ["MySQL / MariaDB", "MongoDB", "SQL", "데이터 모델링"]
+      "items": ["MySQL / MariaDB", "MongoDB", "SQL", "ERD 설계", "쿼리 개선"]
     },
     {
       "title": "Reliability / Automation",
-      "items": ["Batch Processing", "Retry / Backoff", "In-memory Cache", "Job Queue", "JWT", "Rate Limit 대응"]
+      "items": ["Batch Processing", "Job Queue", "Retry / Backoff / Jitter", "Cache Invalidation", "Rate Limit 대응", "JWT"]
     },
     {
-      "title": "Infra / Ops",
-      "items": ["Linux", "Nginx", "Cloudflare", "Crontab", "Windows Task Scheduler", "SSL / HTTPS"]
+      "title": "Infra / Security",
+      "items": ["Linux", "Nginx", "Cloudflare", "DNS / SSL", "접근 제어", "무중단 마이그레이션"]
     },
     {
       "title": "Additional Experience",
